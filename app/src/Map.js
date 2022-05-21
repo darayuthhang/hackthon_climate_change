@@ -9,9 +9,9 @@ mapboxgl.accessToken =
 const Map = () => {
     const mapContainerRef = useRef(null);
 
-    const [lng, setLng] = useState(5);
-    const [lat, setLat] = useState(34);
-    const [zoom, setZoom] = useState(1.5);
+    const [lng, setLng] = useState(-70.9);
+    const [lat, setLat] = useState(42.35);
+    const [zoom, setZoom] = useState(9);
   
 
     // Initialize map when component mounts
@@ -19,20 +19,20 @@ const Map = () => {
         const map = new mapboxgl.Map({
             container: mapContainerRef.current,
             style: 'mapbox://styles/mapbox/streets-v11',
-            center: [-65.017, -16.457],
-            zoom: 9 // starting zoom
+            center: [lng, lat],
+            zoom: zoom // starting zoom
         });
 
         // Set marker options.
         const marker = new mapboxgl.Marker({
-            color: "#FFFFFF",
+            color: "#3FB1CE",
             draggable: true
-        }).setLngLat([38.4161, 63.6167])
+        }).setLngLat([lng, lat])
             .addTo(map);
-   
+      
+
         //Add navigation control (the +/- zoom buttons)
         map.addControl(new mapboxgl.NavigationControl(), 'top-right');
-
         //Create a default Marker and add it to the map.
         map.on('move', () => {
             setLng(map.getCenter().lng.toFixed(4));
