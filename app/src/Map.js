@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
-// import './Map.css';
+import './Map.css'
+
 
 mapboxgl.accessToken =
     'pk.eyJ1IjoiZGFyYXl1dGhoYW5nIiwiYSI6ImNrbW0zam90ZjFoN2Iyb3Q0cjlrZXAyZGEifQ.gz0ymRmL02S-Zt6lUeZhVw';
@@ -11,19 +12,28 @@ const Map = () => {
     const [lng, setLng] = useState(5);
     const [lat, setLat] = useState(34);
     const [zoom, setZoom] = useState(1.5);
+  
 
     // Initialize map when component mounts
     useEffect(() => {
         const map = new mapboxgl.Map({
             container: mapContainerRef.current,
             style: 'mapbox://styles/mapbox/streets-v11',
-            center: [lng, lat],
-            zoom: zoom
+            center: [-65.017, -16.457],
+            zoom: 9 // starting zoom
         });
 
-        // Add navigation control (the +/- zoom buttons)
+        // Set marker options.
+        const marker = new mapboxgl.Marker({
+            color: "#FFFFFF",
+            draggable: true
+        }).setLngLat([38.4161, 63.6167])
+            .addTo(map);
+   
+        //Add navigation control (the +/- zoom buttons)
         map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 
+        //Create a default Marker and add it to the map.
         map.on('move', () => {
             setLng(map.getCenter().lng.toFixed(4));
             setLat(map.getCenter().lat.toFixed(4));
@@ -37,7 +47,7 @@ const Map = () => {
     return (
         <div>
             <div className='sidebarStyle'>
-                <div>
+                <div className=''>
                     Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
                 </div>
             </div>
