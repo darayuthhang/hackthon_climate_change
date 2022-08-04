@@ -6,7 +6,7 @@ import Map from './Map';
 function App() {
   return (
     <div className="App">
-    <h1>hello world hellos</h1>
+    <h1>hello world john</h1>
       <Container className='p-3'>
         <Row>
           <Col>
